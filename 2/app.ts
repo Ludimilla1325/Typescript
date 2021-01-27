@@ -1,8 +1,11 @@
-//Union Types - Use two types
+// Custom Type - you can give whetever name you want to, you gonna assign the type you want to encode in your alias
+type Combinable = number | string;
+type ConversionDescriptor = 'as-number' | 'as-text';
+
 function combine(
-    input1: number | string, 
-    input2: number | string, 
-    resultConvertion:  'as-number' | 'as-text' //Using unios with literal types
+    input1: Combinable, 
+    input2: Combinable, 
+    resultConvertion: ConversionDescriptor
 ){
     let result;
     if (typeof input1 === 'number' && typeof input2 === 'number' || resultConvertion === 'as-number'){

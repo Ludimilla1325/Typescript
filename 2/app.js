@@ -1,6 +1,4 @@
-//Union Types - Use two types
-function combine(input1, input2, resultConvertion //Using unios with literal types
-) {
+function combine(input1, input2, resultConvertion) {
     var result;
     if (typeof input1 === 'number' && typeof input2 === 'number' || resultConvertion === 'as-number') {
         result = +input1 + +input2;
