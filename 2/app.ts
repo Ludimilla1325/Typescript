@@ -1,33 +1,11 @@
-// Custom Type - you can give whetever name you want to, you gonna assign the type you want to encode in your alias
-type Combinable = number | string;
-type ConversionDescriptor = 'as-number' | 'as-text';
+// White is the scenario where you have a function that doesnt return a value
 
-function combine(
-    input1: Combinable, 
-    input2: Combinable, 
-    resultConvertion: ConversionDescriptor
-){
-    let result;
-    if (typeof input1 === 'number' && typeof input2 === 'number' || resultConvertion === 'as-number'){
-        result = +input1 + +input2;
-    } else {
-        result = input1.toString() + input2.toString(); 
-    }  
-
-    return result;
-
-    // if (resultConvertion === 'as-number'){
-    //     return +result; //+ return a number, aqui está forçando para retornar um número
-    // } else
-    // return result.toString();
-    // }
-
+function add(n1:number, n2:number): number {
+    return n1 + n2; //here return a number
 }
-const combinedAges = combine(30,26, 'as-number');
-console.log(combinedAges);
 
-const combinedStringAges = combine('30','26', 'as-number');
-console.log(combinedStringAges);
+function showResult(num: number):void {
+    console.log('Result:' + num);
+}
 
-let combinedNames = combine('Max', 'Anna', 'as-text');
-console.log(combinedNames);
+showResult(add(5, 12));
