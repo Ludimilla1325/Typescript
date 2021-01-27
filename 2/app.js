@@ -1,15 +1,10 @@
-// White is the scenario where you have a function that doesnt return a value
-function add(n1, n2) {
-    return n1 + n2; //here return a number
+// Unknow - because we dont know what the user will eventually enter
+// we shouldnt use Unknows all the time, but is better to use "unknow" than "any"
+var userInput; //You can set any type here
+var userName;
+userInput = 5;
+userInput = 'Max';
+if (typeof userInput === 'string') {
+    userName = userInput;
 }
-function showResult(num) {
-    console.log('Result:' + num);
-}
-function addAndHandle(n1, n2, cb) {
-    var result = n1 + n2;
-    cb(result);
-}
-showResult(add(5, 12));
-var combineValues; //Combined values should accept any function that takes two parameter that is number and should return a number
-combineValues = add;
-console.log(combineValues(8, 8));
+//console.log(userInput)
