@@ -5,7 +5,11 @@ function add(n1, n2) {
 function showResult(num) {
     console.log('Result:' + num);
 }
+function addAndHandle(n1, n2, cb) {
+    var result = n1 + n2;
+    cb(result);
+}
+showResult(add(5, 12));
 var combineValues; //Combined values should accept any function that takes two parameter that is number and should return a number
 combineValues = add;
 console.log(combineValues(8, 8));
-showResult(add(5, 12));
