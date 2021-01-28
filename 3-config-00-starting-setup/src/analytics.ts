@@ -1,3 +1,8 @@
-console.log('Sending!...');
+let logged;
 
-//tsc --init - when u use that u r not pointing at a specific file,it will initialize this project,
+function sendAnalytics(data:string){
+    console.log(data);
+    logged = true
+}
+
+sendAnalytics('The data');
