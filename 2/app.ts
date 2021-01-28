@@ -9,4 +9,13 @@ if (typeof userInput === 'string'){
     userName = userInput;
 }
 
-//console.log(userInput)
+// Intended to Never returns anything- 
+//This function never produce a return value, this function always crashes the scrip
+
+function generateError(message:string, code:number): never{
+    throw{message:message, errorCode: code};
+//     while(true){} //function with infinite loop will never return something too
+}
+
+const result = generateError('AAn error occurred!', 500);
+console.log(result);
