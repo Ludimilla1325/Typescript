@@ -12,4 +12,4 @@ function clickHandler(message: string){
 }
 if (button){
     button?.addEventListener('click',clickHandler.bind(null, "Your welcome!"));
-}
+}   
