@@ -20,7 +20,7 @@ const activeHobbies = ['Hiking'];
 activeHobbies.push(...hobbies);
 
 const person ={
-    name:'Max',
+    firstName:'Max',
     age:30
 };
 
@@ -36,3 +36,14 @@ const add = (...numbers: number[]) =>{ // here accept many arguments as i get
 
 const addedNumbers = add(10, 20, 30,3);
 console.log(addedNumbers);
+
+
+//Array & Object Destructuring
+//To put the elements of hobbies out of hobbies, 1st element to hobby1 and 2nd to hobby2 and the rest to remainingHobbies
+const [hobby1, hobby2, ...remainingHobbies] =  hobbies;
+console.log(hobbies, hobby1, hobby2);
+
+// To put name and age out of person
+const { firstName:userName, age} = person;
+
+console.log(userName, age);
