@@ -46,4 +46,4 @@ console.log(hobbies, hobby1, hobby2);
 // To put name and age out of person
 const { firstName:userName, age} = person;
 
-console.log(userName, age);
+console.log(userName, age,person);
