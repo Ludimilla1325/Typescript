@@ -1,13 +1,15 @@
 class Department {
-    public name: string; // it can be used out of class
+    // private id: string;
+    // private name: string;
     private employees: string[]= []; //private makes it private only to what s inside class
 
-    constructor(n: string){
-        this.name = n; 
+    constructor(private id:string, public name: string){
+        // this.id = id;
+        // this.name = n; 
     }
 
     describe(){
-        console.log('Department: '+ this.name); // We use this to refer to a class property or a method from inside of the class
+        console.log(`Department (${this.id}): ${this.name}`); // We use this to refer to a class property or a method from inside of the class
     }
     addEmployee(employee:string){
         this.employees.push(employee);
@@ -18,7 +20,7 @@ class Department {
     }
 }
 
-const accounting = new Department("Accounting");
+const accounting = new Department("id","Accounting");
 
 accounting.addEmployee('Max');
 accounting.addEmployee('Manu');
