@@ -1,7 +1,7 @@
 class Department {
     // private readonly id: string;
     // private name: string;
-    private employees: string[]= []; //private makes it private only to what s inside class, 
+    protected employees: string[]= []; //protected is like private, but is not available in the class but also in any class that extends this class
 
     constructor(private readonly id:string, public name: string){ //readonly means that the id shouldnt change, it can be used only in initialization
         // this.id = id;
@@ -21,6 +21,7 @@ class Department {
     }
 }
 
+//-----
 class ITDepartment extends Department{
     admins: string[];
     constructor(id:string, admins:string[]){
@@ -28,9 +29,17 @@ class ITDepartment extends Department{
         this.admins = admins;
     }
 }
+
+//----
 class AccountingDepartment extends Department{
     constructor(id:string, private reports:string[]){
         super(id, 'Accounting');
+}
+addEmployee(name:string){
+    if (name === 'Max'){
+        return;
+    }
+    this.employees.push(name);
 }
 
 addReport(text:string){
@@ -60,4 +69,9 @@ const accounting = new AccountingDepartment('d2', []);
 
 accounting.addReport('Something went wrong...');
 
+accounting.addEmployee('Max');
+accounting.addEmployee('Mari');
+
 accounting.printReports();
+accounting.printEmployeeInformation();
+
