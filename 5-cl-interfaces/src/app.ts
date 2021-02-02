@@ -1,4 +1,5 @@
 class Department {
+    static fiscalYear = 2020; // when u add the static in a class, you cant acess them from inside your non static parts 
     // private readonly id: string;
     // private name: string;
     protected employees: string[]= []; //protected is like private, but is not available in the class but also in any class that extends this class
@@ -6,6 +7,10 @@ class Department {
     constructor(private readonly id:string, public name: string){ //readonly means that the id shouldnt change, it can be used only in initialization
         // this.id = id;
         // this.name = n; 
+    }
+
+    static createEmployee(name:string){
+        return {name:name};
     }
 
     describe(){
@@ -69,6 +74,10 @@ printReports(){
     console.log(this.reports);
 }
 }
+
+// --- Using static
+const employee1 = Department.createEmployee('Max');
+console.log(employee1, Department.fiscalYear);
 
 //-----
 const it = new ITDepartment('d1',['Max']);
