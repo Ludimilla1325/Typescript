@@ -1,10 +1,10 @@
-class Department {
+abstract class Department { //Abstract is very useful to forest at all classes based on some other class share some common method or property
     static fiscalYear = 2020; // when u add the static in a class, you cant acess them from inside your non static parts 
     // private readonly id: string;
     // private name: string;
     protected employees: string[]= []; //protected is like private, but is not available in the class but also in any class that extends this class
 
-    constructor(private readonly id:string, public name: string){ //readonly means that the id shouldnt change, it can be used only in initialization
+    constructor(protected readonly id:string, public name: string){ //readonly means that the id shouldnt change, it can be used only in initialization
         // this.id = id;
         // this.name = n; 
     }
@@ -13,9 +13,8 @@ class Department {
         return {name:name};
     }
 
-    describe(){
-        console.log(`Department (${this.id}): ${this.name}`); // We use this to refer to a class property or a method from inside of the class
-    }
+    abstract describe(this: Department): void;
+
     addEmployee(employee:string){
     
         this.employees.push(employee);
@@ -33,11 +32,15 @@ class ITDepartment extends Department{
         super(id, 'IT'); //Whenever you add ur own constructor in a class that inherits from a number of class, u must add super(); in the inherits class
         this.admins = admins;
     }
+    describe(){
+        console.log('IT Department - ID:' + this.id);
+}
 }
 
 //----
 class AccountingDepartment extends Department{
     private lastReport: string;
+    private static instance: AccountingDepartment;
 
 // ######### A get method has to return something!! ######
     get mostRecentReport(){
@@ -55,10 +58,24 @@ class AccountingDepartment extends Department{
         this.addReport(value);
     }
 
-    constructor(id:string, private reports:string[]){
+    private constructor(id:string, private reports:string[]){
         super(id, 'Accounting');
         this.lastReport = reports[0];
 }
+
+static getInstance(){
+    if (AccountingDepartment.instance){
+        return this.instance;
+    }
+    //This can only run once, becaause we have an instance adnd we make of this if block, and return the existing instance
+    this.instance =  new AccountingDepartment('d2',[]);
+    return this.instance
+}
+
+describe(){
+    console.log('Accounting Department - ID:' + this.id)
+}
+
 addEmployee(name:string){
     if (name === 'Max'){
         return;
@@ -94,7 +111,11 @@ it.printEmployeeInformation();
 console.log(it);
 
 //----
-const accounting = new AccountingDepartment('d2', []);
+// const accounting = new AccountingDepartment('d2', []);
+const accounting = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+
+console.log(accounting, accounting2) //they are the same object because we have the same instance, only one, 
 
 //acess as a property with (=)
 accounting.mostRecentReport = 'Year end report';
@@ -104,6 +125,16 @@ console.log(accounting.mostRecentReport);
 accounting.addEmployee('Max');
 accounting.addEmployee('Mari');
 
-accounting.printReports();
-accounting.printEmployeeInformation();
+// accounting.printReports();
+// accounting.printEmployeeInformation();
+accounting.describe();
 
+// let departmentOne = new Department('d3', 'Lu');
+// console.log(departmentOne.name);
+
+console.log(Department.fiscalYear);
+
+console.log(Department.createEmployee('Mary'))
+
+//overwriting
+//overload
