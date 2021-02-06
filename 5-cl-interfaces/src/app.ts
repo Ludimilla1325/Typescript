@@ -2,14 +2,14 @@ interface Named{
     readonly name: string;  // here we force to have a name implemented
 }
 
-
-interface Greetable{ 
+//A way we can combine interfaces, and u can inherited more than one interface
+interface Greetable extends Named{ // Here forces to have greet plus what is the interface that is being extended
     greet(phrase: string):void; // here we force to have this greet 
 }
 
 //we can use the interface to type check an object, It allows we define a struct of one object
 
-class Person implements Greetable, Named{ //Here we r implementing the Interfaces
+class Person implements Greetable{ //Here we r implementing the Interfaces
     name:string;
     age=30;
 
