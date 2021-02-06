@@ -1,23 +1,29 @@
-interface Person{ //Interface cant have an initialize, so we must not pass the concrete values.
+interface Greetable{ //Interface cant have an initialize, so we must not pass the concrete values.
     name: string;
-    age:number;
 
     greet(phrase: string):void;
 }
 
 //we can use the interface to type check an object, It allows we define a struct of one object
 
-let user1: Person;
+class Person implements Greetable{
+    name:string;
+    age=30;
 
-user1 = {
-    name:'Max',
-    age:30,
+    constructor(n:string){
+        this.name = n;
+    }
     greet(phrase: string){
         console.log(phrase + ' ' + this.name);
     }
-};
+}
+
+let user1: Greetable;
+
+user1 =  new Person('Ludi');
 
 user1.greet("Hello, my name is");
+console.log(user1);
 
 //WHATS THE DIFFERENCE BETWEEN INTERFACE AND CONST TYPE?
 /* 
@@ -27,6 +33,6 @@ union types.
 - To define an interface is clear that u want define the struct
 of an objecy, 
 - Interface can be use as a contract, a class can implement and class that hears too
-
+So we can put an interface in a class, like here class Person implements Greetable{
 */
 
