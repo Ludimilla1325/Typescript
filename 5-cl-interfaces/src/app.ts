@@ -1,15 +1,26 @@
-interface Named{
-    readonly name: string;  // here we force to have a name implemented
+//Interfaces can be used to define the structure of a function
+
+// type AddFn = (a:number, b:number) => number;
+interface AddFn { // gonna use this interface as a function type
+    (a:number, b:number):number;
 }
 
-//A way we can combine interfaces, and u can inherited more than one interface
-interface Greetable extends Named{ // Here forces to have greet plus what is the interface that is being extended
-    greet(phrase: string):void; // here we force to have this greet 
+let add: AddFn;
+
+add = (n1: number, n2: number) =>{
+    return n1+ n2;
+};
+
+//------
+interface Named{ 
+    readonly name: string; 
 }
 
-//we can use the interface to type check an object, It allows we define a struct of one object
+interface Greetable extends Named{ 
+    greet(phrase: string):void; 
+}
 
-class Person implements Greetable{ //Here we r implementing the Interfaces
+class Person implements Greetable{ 
     name:string;
     age=30;
 
