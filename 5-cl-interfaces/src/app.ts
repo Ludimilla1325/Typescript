@@ -13,7 +13,9 @@ add = (n1: number, n2: number) =>{
 
 //------
 interface Named{ 
-    readonly name: string; 
+    readonly name?: string;
+    outputName?: string; // We dont want force, it can be option fi might exist in classes or not
+    // You can also mark methods as "optional!=>myMethod?(){...}"
 }
 
 interface Greetable extends Named{ 
@@ -21,20 +23,26 @@ interface Greetable extends Named{
 }
 
 class Person implements Greetable{ 
-    name:string;
+    name?:string; //Name is optional
     age=30;
 
-    constructor(n:string){
-        this.name = n;
+    constructor(n?:string){ //you can add optional in paramenters
+        if(n){
+            this.name = n;
+        }
     }
     greet(phrase: string){
-        console.log(phrase + ' ' + this.name);
+        if (this.name){ // If we receive a name, we gonna print this option
+
+            console.log(phrase + ' ' + this.name);
+        } else
+        console.log('Hi!');
     }
 }
 
 let user1: Greetable;
 
-user1 =  new Person('Ludi');
+user1 =  new Person();
 
 user1.greet("Hello, my name is");
 console.log(user1);
