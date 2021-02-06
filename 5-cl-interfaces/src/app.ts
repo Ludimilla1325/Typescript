@@ -34,5 +34,14 @@ union types.
 of an objecy, 
 - Interface can be use as a contract, a class can implement and class that hears too
 So we can put an interface in a class, like here class Person implements Greetable{
-*/
+
+    Why interfaces?
+- Good to use with class
+- When a part of code rely on that stricture like "let user1: Greetable;", we know that the greet
+method must be there, because the greetable is store in the user1. Greetable forces that anywhere that use it
+must have a greet method.
+- Allows us to qrite powerful and flexible code
+
+
+    */
 
