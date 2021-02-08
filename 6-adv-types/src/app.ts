@@ -110,3 +110,22 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({type: 'bird', flyingSpeed: 10});
+
+// const paragraph = document.querySelector('p');
+
+// const paragraph = document.getElementById('message-output');
+
+
+//In <HTMLInputElement>, here we are telling the typescript the type
+//const userInputElement =<HTMLInputElement> document.getElementById('user-input')!; 
+// This ! allows us to tell typescript that th expression in front of it will never yield null
+
+// In this case, the expression will yield a value of type
+//const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+
+const userInputElement = document.getElementById('user-input');
+
+//in order to not use the !, when there is possibility of null
+    if (userInputElement){
+        (userInputElement as HTMLInputElement).value = 'Hi there!';
+    }
