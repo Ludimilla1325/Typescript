@@ -82,9 +82,31 @@ function useVehicle(vehicle: Vehicle){
 useVehicle(v1); //caling useVehicle
 useVehicle(v2);
 
-/* Type guards is just a term that descfrobe the idea or approach of checking if
-a certain property pr method exists before you try to use it or if you do something
-with the type before you try to use it for objects that can be done with instance of "in", 
-"of", "typeof". And give all the flexibility of union types and write code that does one thing
-or the other based on the exact type
+/* Discrimanated Unions is a pattern which you can use when working with union types that makes implementing types guards easier
 */
+
+interface Bird {  //can be classes
+    type:'bird';
+    flyingSpeed: number;
+}
+
+interface Horse{
+    type: 'horse'; // we have one comum object property in every object which describe this object
+    runningSpeed:number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+    let speed;
+    switch(animal.type){
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed
+    }
+    console.log('Moving with speed:' + speed)
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10});
