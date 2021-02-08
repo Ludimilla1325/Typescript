@@ -1,3 +1,4 @@
+"use strict";
 // Unknow - because we dont know what the user will eventually enter
 // we shouldnt use Unknows all the time, but is better to use "unknow" than "any"
 var userInput; //You can set any type here
