@@ -49,7 +49,11 @@ const fetchedUserData = {
 
 console.log(fetchedUserData?.job?.title); //You can add a ? after the thing you're not sure whether its to find or not, so it will check if exists before tries to acess this.
 
+const userInput = ' ';
 
+const storedData = userInput ?? 'DEFAULT'; // ?? is called Nullish Coalescing, means if this is null or undefined we gonna use the dault, if not we gonna use the value before that
+
+console.log(storedData);
 
 
 // type UnknownEmployee = Employee | Admin;
