@@ -41,7 +41,13 @@ function add(a: Combinable, b:Combinable){
 const result = add('ludi', 'Milla');
 result.split(' '); //split is just for string
 
+const fetchedUserData = {
+    id:'u1',
+    name:'Max',
+    job:{title:'CEO', description:'My own company'}
+};
 
+console.log(fetchedUserData?.job?.title); //You can add a ? after the thing you're not sure whether its to find or not, so it will check if exists before tries to acess this.
 
 
 
