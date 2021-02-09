@@ -115,17 +115,22 @@ moveAnimal({type: 'bird', flyingSpeed: 10});
 
 // const paragraph = document.getElementById('message-output');
 
-
-//In <HTMLInputElement>, here we are telling the typescript the type
 //const userInputElement =<HTMLInputElement> document.getElementById('user-input')!; 
-// This ! allows us to tell typescript that th expression in front of it will never yield null
-
-// In this case, the expression will yield a value of type
 //const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
 
 const userInputElement = document.getElementById('user-input');
-
-//in order to not use the !, when there is possibility of null
     if (userInputElement){
         (userInputElement as HTMLInputElement).value = 'Hi there!';
     }
+
+// Index properties- we can use it, when there are many inputs from users, and each one have a different situation
+
+interface ErrorContainer{
+    [prop: string]: string;  //We dont exaclty what will be the input but we know that every property which is added to object which is bassed on error container must have a porperty name which can be interpreted as a string and the value for that property
+}
+
+const errorBag: ErrorContainer = {
+    email: 'Not a valid email!',
+    username: 'Must start with a capital character!'
+};
+
