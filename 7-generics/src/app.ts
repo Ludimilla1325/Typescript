@@ -19,3 +19,23 @@ function merge<T extends object, U extends object>(objA: T, objB: U){  //This fu
 }
 const mergeObj = merge({name: 'Max', hobbies: ['Sports']}, {age:30}); //typescript simply infers the types of the value we are passing as argumet
 console.log(mergeObj);
+
+//GENERIC FUNCTION
+
+//97 - ERROR
+interface Lenghty {
+    lenght: number;
+}
+function  countAndDescribe<T extends Lenghty>(element: T): [T, string]{
+    let descriptionText = 'Got no value.';
+    if (element.lenght === 1){
+        descriptionText= 'Got 1 elementet.';
+    } else if (element.lenght > 1){
+        descriptionText = 'Got' + element.lenght + 'elements.';
+    }
+    return [element, descriptionText];
+}
+
+console.log(countAndDescribe('hi'));
+
+
