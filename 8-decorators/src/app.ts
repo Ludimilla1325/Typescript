@@ -1,10 +1,22 @@
-/* DECORATORS
+// You must on "experimentalDecorators": true in tsconfig, to use decorators
 
-Meta- programming -  ypu wont use tech writers that often to have a direct impact on the end users of your page but 
-decorators are a intrument to write code which is easier to use by others developers
-With Decorators we can guarantee that one of our classes get users correctly, or a method in a class.
+function Logger( constructor: Function){
+    console.log('Logging...');
+    console.log(constructor)
+}
 
-MODULE CONTENT
-*/
+// After @ should point a function which should be ur decorator
+@Logger
+class Person {
+    name = 'Max';
+
+    constructor(){
+        console.log('Creating person object ...');
+    }
+}
+
+const pers = new Person();
+
+console.log(pers);
 
 
