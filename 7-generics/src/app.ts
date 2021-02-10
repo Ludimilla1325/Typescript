@@ -38,4 +38,10 @@ function  countAndDescribe<T extends Lenghty>(element: T): [T, string]{
 
 console.log(countAndDescribe('hi'));
 
+// KEYOF CONSTRAINT- we can use generic types with key to ensure that we have correct structure
 
+function extractAndConvert <T extends object, U extends keyof T>(obj: T, key: U){ //1st paramenter should be any kind of object and the 2nd should be any kind of key in that object
+    return 'Value:' + obj[key]; // we are using to guarantee that this "key" exists
+}
+
+extractAndConvert({name: 'Ludi'}, 'name'); // {} here i add a name key
