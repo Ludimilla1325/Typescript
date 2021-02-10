@@ -36,7 +36,7 @@ function  countAndDescribe<T extends Lenghty>(element: T): [T, string]{
     return [element, descriptionText];
 }
 
-console.log(countAndDescribe('hi'));
+//console.log(countAndDescribe('hi'));
 
 // KEYOF CONSTRAINT- we can use generic types with key to ensure that we have correct structure
 
@@ -45,3 +45,39 @@ function extractAndConvert <T extends object, U extends keyof T>(obj: T, key: U)
 }
 
 extractAndConvert({name: 'Ludi'}, 'name'); // {} here i add a name key
+
+//GENERIC CLASSES - flexible with type support
+
+class DataStorage<T extends string | number | boolean> { //flebility and type safety because we know perfectly what is stored
+    private data: T[] = [];
+
+    addItem(item: T){
+        this.data.push(item);
+    }
+
+    removeItem(item: T){
+        if (this.data.indexOf(item) === -1){
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    }
+
+    getItems(){
+        return[...this.data];
+    }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Ludi');
+textStorage.addItem('Lara');
+textStorage.removeItem('Ludi');
+console.log(textStorage.getItems());
+
+const numberStorage = new DataStorage<number>();
+
+// const objStorage = new DataStorage<object>();
+// const maxObj = {name: 'Max'};
+// objStorage.addItem(maxObj).
+// objStorage.addItem({name:'Manu'});
+// objStorage.removeItem(maxObj);
+// console.log(objStorage.getItems());
