@@ -107,6 +107,7 @@ const names: Readonly<string[]> = ['Max', 'Ludi']; //This property can just be r
 // names.push('Manu');
 
 
-//GENERIC TYPES - its great if you want to lock in a certain type, use the same type through the enterice class instance, or enture function | lock in a type
+//GENERIC TYPES - its great if you want to lock in a certain type, use the same type through the enterice class instance, or enture function | lock in a type | Generics help you create data structures that work together or wrap values of a broad variety of types (e.g. an array that can hold any type of data).
 //      vs 
-//UNION TYPES - Its great if you want to have a function which you can call with one of these types everytime you call it generic | when u are flexible to have different type with every method call with every function
+//UNION TYPES - Its great if you want to have a function which you can call with one of these set types that you allow in a certain place everytime you call it generic | when u are flexible to have different type with every method call with every function
+
