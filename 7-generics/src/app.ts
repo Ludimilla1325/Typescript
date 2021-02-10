@@ -105,3 +105,8 @@ function createCourseGoal(
 
 const names: Readonly<string[]> = ['Max', 'Ludi']; //This property can just be read, and is good cuz u r precised abt what u do in ur code
 // names.push('Manu');
+
+
+//GENERIC TYPES - its great if you want to lock in a certain type, use the same type through the enterice class instance, or enture function | lock in a type
+//      vs 
+//UNION TYPES - Its great if you want to have a function which you can call with one of these types everytime you call it generic | when u are flexible to have different type with every method call with every function
