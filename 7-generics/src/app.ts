@@ -46,7 +46,7 @@ function extractAndConvert <T extends object, U extends keyof T>(obj: T, key: U)
 
 extractAndConvert({name: 'Ludi'}, 'name'); // {} here i add a name key
 
-//GENERIC CLASSES - flexible with type support
+//GENERIC CLASSES - flexible with full type support
 
 class DataStorage<T extends string | number | boolean> { //flebility and type safety because we know perfectly what is stored
     private data: T[] = [];
@@ -81,3 +81,27 @@ const numberStorage = new DataStorage<number>();
 // objStorage.addItem({name:'Manu'});
 // objStorage.removeItem(maxObj);
 // console.log(objStorage.getItems());
+
+
+//GENERIC UTILITY TYPES - (Partial / Readonly)
+
+interface CourseGoal{
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+function createCourseGoal(
+    title: string,
+    description: string,
+    date: Date
+): CourseGoal{
+    let courseGoal: Partial<CourseGoal> = {}; //Partial- open anything up
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ['Max', 'Ludi']; //This property can just be read, and is good cuz u r precised abt what u do in ur code
+// names.push('Manu');
