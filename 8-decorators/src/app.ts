@@ -99,3 +99,24 @@ class Product {
         return this._price * (1 + tax);
     }
 }
+
+const p1 = new Product('Book', 18);
+const p2 = new Product('Book 2', 29);
+
+// console.log(p2);
+
+
+class Printer {
+    message = 'This works';
+
+
+    showMessage(){
+        console.log(this.message);
+    }
+}
+
+const p = new Printer();
+
+const button = document.querySelector('button');
+button.addEventListener('click', p.showMessage.bind(p)); // this bind(p), doesnt refer to the EventListener but to the new Printer()
+
