@@ -14,18 +14,25 @@ function Logger(logString: string){
 // DECORATOR FACTORY
 function withTemplate(template: string, hookId: string){ // Here i want render some template which should be some html code into some place in the DOM,
     console.log('TEMPLATE FACTORY');
-    return function (constructor: any){ // _ we use that before to say that we are aware of it but that we dont want to use it
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl){ //I want render this here
-            hookEl.innerHTML = template;
-            hookEl.querySelector('h1')!.textContent = p.name;
+    return function<T extends {new(...args: any[]):{name:string}}> (originalConstructor: T){ // _ we use that before to say that we are aware of it but that we dont want to use it
+        return class extends originalConstructor{ //we r trying to replace with the new constructor function, we still execute the old logic but with the wth the new logic that it should be rendered the dom if really instantiate the object
+            constructor(..._: any[]){ // _ we know but we dont use thar
+                super();  // we use super when a construcctor extends an original constructor 
+                console.log('Rendering template');
+                const hookEl = document.getElementById(hookId);
+                if (hookEl){ //I want render this here
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector('h1')!.textContent = this.name; //acess this.name to get the name property value 
+                }
+            }
         }
     }
 }
 // After @ should point a function which should be ur decorator
 // @Logger('LOGGING - PERSON')
-@Logger('LOGGING')
+
+//We can use multiple decorators, and the decorator function happens in the order in which we specify these factory, but the execution of the actual decorator functions then happens bottom up
+@Logger('LOGGING')                
 @withTemplate('<h1>My person object</h1>', 'app')
 class Person {
     name = 'Max';
@@ -40,3 +47,55 @@ const pers = new Person();
 console.log(pers);
 
 
+// -----------
+
+function Log(target: any, propertyName: string | Symbol){
+    console.log('Property decorator!');
+    console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor){
+    console.log('Acessor decorator!');
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+}
+
+function Log3(target: any, name: string | Symbol, descriptor:PropertyDescriptor){  //target is the instance method, is the prototype of the object
+    console.log('Method decorator!');
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+}
+
+function Log4(target: any, name: string | Symbol, position: number){
+    console.log('Parameter decorator!');
+    console.log(target);
+    console.log(name);
+    console.log(position);
+}
+
+class Product {
+    @Log  
+    title: string;
+    private _price: number;  // _  we cant directly reach it
+
+    @Log2
+
+    set price(val: number){
+        if (val > 0){
+                this._price = val;
+        } else {
+            throw new Error ('Invalid price - should be positive!');
+        }
+    }
+    constructor(t: string, p:number){
+        this.title = t;
+        this._price = p;
+    }
+
+    @Log3   //Method decorator
+    getPriceWithTax(@Log4 tax: number){
+        return this._price * (1 + tax);
+    }
+}
