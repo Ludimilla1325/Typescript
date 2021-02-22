@@ -1,3 +1,22 @@
+//autobind decorator
+function autobind(
+    _:any, 
+    _2: string,  // _ when u r aware u wont use this arguments
+    descriptor: PropertyDescriptor
+) {
+    const orginalMethod = descriptor.value; // we store the method we origin defined
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true,
+        get(){ //should be executed when we try to acess the function
+            const boundFn = orginalMethod.bind(this);
+            return boundFn;
+        }
+    };
+    return adjDescriptor;
+}
+
+
+//Project Input Class
 // ---- To get the acess to all the elements (but we r not rendering anything)
 class ProjectInput {
     templateElement: HTMLTemplateElement;
@@ -30,13 +49,14 @@ class ProjectInput {
 
     //Listener to our form
 
+    @autobind
     private submitHandler(event: Event){ //receive an event object
         event.preventDefault();
         console.log(this.titleInputElement.value);
     }
 
     private configure(){
-        this.element.addEventListener('submit', this.submitHandler.bind(this)); // bind is to pre configure how this function is going to execute, the first argument is what is the "this" keyword will refer to
+        this.element.addEventListener('submit', this.submitHandler); // bind is to pre configure how this function is going to execute, the first argument is what is the "this" keyword will refer to
     }
 
     private attach(){
