@@ -49,11 +49,39 @@ class ProjectInput {
 
     //Listener to our form
 
+    private gatherUserInput() :[string, string, number] | void {//this method returns a tuple or a void, that doesnt return something
+        const enteredTitle = this.titleInputElement.value;
+        const enteredDescription = this.descriptionInputElement.value;
+        const enteredPeople = this.peopleInputElement.value;
+
+        if (
+            enteredTitle.trim().length === 0 ||
+            enteredDescription.trim().length === 0 ||
+            enteredPeople.trim().length === 0
+        ) {
+            alert('Invalid input, please try again!')
+            return;
+        } else {
+            return [enteredTitle, enteredDescription, +enteredPeople]; // + converts to a number
+        }
+    } 
+
+    private clearInputs(){
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
+    }
+
     @autobind
     private submitHandler(event: Event){ //receive an event object
         event.preventDefault();
-        console.log(this.titleInputElement.value);
-    }
+        const userInput = this.gatherUserInput();
+        if (Array.isArray(userInput)){ // a tuple is an array, so if we get true here, we get the tuple
+           const [title,desc, people] = userInput;
+           console.log(title,desc,people); 
+           this.clearInputs();
+        }
+    } 
 
     private configure(){
         this.element.addEventListener('submit', this.submitHandler); // bind is to pre configure how this function is going to execute, the first argument is what is the "this" keyword will refer to
