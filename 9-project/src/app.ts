@@ -132,8 +132,15 @@ class ProjectState {
       this.element = importedNode.firstElementChild as HTMLElement;
       this.element.id = `${this.type}-projects`;
   
+      // Listener function - Filter between ACTIVE AND FINISHED PROJECTS
       projectState.addListener((projects:Project[]) => {
-        this.assignedProjects = projects;
+        const relevantProjects = projects.filter(prj =>{
+            if (this.type ==='active') {
+                return prj.status === ProjectStatus.Active;
+            }
+            return prj.status === ProjectStatus.Finished;
+        });
+        this.assignedProjects = relevantProjects;
         this.renderProjects();
       });
   
@@ -143,6 +150,7 @@ class ProjectState {
   
     private renderProjects() {
       const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
+      listEl.innerHTML = ''; // we get rid of all list items and then re rend, so whenever we get a new project, we gonna re rend all projects
       for (const prjItem of this.assignedProjects) {
         const listItem = document.createElement('li');
         listItem.textContent = prjItem.title;
