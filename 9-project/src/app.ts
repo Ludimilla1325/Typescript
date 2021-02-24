@@ -197,7 +197,8 @@ class ProjectState extends State<Project>{
         @autobind
         // methods that only help us to write dragable component or classes in a uniforme way
         dragStartHandler(event: DragEvent) {
-            console.log(event);
+            event.dataTransfer!.setData('text/plain', this.project.id); // dataTransfer is special for  drag events (identifies of the format of the data, id of the project)
+            event.dataTransfer!.effectAllowed = 'move'; // controls hows the cursor will look like and tells the browser our intentions(move)
         }
         
         dragEndHandler(_: DragEvent){ // we r not using it
@@ -233,12 +234,17 @@ class ProjectState extends State<Project>{
 
     @autobind
     // Drag Events
-    dragOverHandler(_: DragEvent) { // change the appearance of the box to know is a place where we can drop
-        const listEl = this.element.querySelector('ul')!;
-        listEl.classList.add('droppable');
+    dragOverHandler(event: DragEvent) { // change the appearance of the box to know is a place where we can drop
+        if(event.dataTransfer && event.dataTransfer.types[0] === 'text/plain') { //Here we transfer the id,  is the datta attached to our drag event, of that format
+           event.preventDefault(); // the default in javascript is not to allow the drop, thats why we must prevent default
+            const listEl = this.element.querySelector('ul')!;
+            listEl.classList.add('droppable');
+        } 
     }
 
-    dropHandler(_: DragEvent) {}
+    dropHandler(event: DragEvent) {
+        console.log(event.dataTransfer!.getData('text/plain'));
+    }
 
     @autobind 
     dragLeaveHandler(_: DragEvent) { // to remove the background if we really dont drop or move the mouse from it
