@@ -216,7 +216,7 @@ class ProjectState extends State<Project>{
       const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
       listEl.innerHTML = ''; // we get rid of all list items and then re rend, so whenever we get a new project, we gonna re rend all projects
       for (const prjItem of this.assignedProjects) {
-        new ProjectItem(this.element.id, prjItem); // id of host / project  -  it will hapen inside of he base class of the component class which project item extends 
+        new ProjectItem(this.element.querySelector('ul')!.id, prjItem); // id of host / project  -  it will hapen inside of he base class of the component class which project item extends 
       }
     }
   }
