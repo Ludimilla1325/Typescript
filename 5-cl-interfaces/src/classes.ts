@@ -8,7 +8,6 @@ abstract class Department { //Abstract is very useful to forest at all classes b
         // this.id = id;
         // this.name = n; 
     }
-
     static createEmployee(name:string){
         return {name:name};
     }
@@ -34,7 +33,7 @@ class ITDepartment extends Department{
     }
     describe(){
         console.log('IT Department - ID:' + this.id);
-}
+    }
 }
 
 //----
@@ -63,33 +62,33 @@ class AccountingDepartment extends Department{
         this.lastReport = reports[0];
 }
 
-static getInstance(){
-    if (AccountingDepartment.instance){
-        return this.instance;
+    static getInstance(){
+        if (AccountingDepartment.instance){
+            return this.instance;
+        }
+        //This can only run once, becaause we have an instance adnd we make of this if block, and return the existing instance
+        this.instance =  new AccountingDepartment('d2',[]);
+        return this.instance
     }
-    //This can only run once, becaause we have an instance adnd we make of this if block, and return the existing instance
-    this.instance =  new AccountingDepartment('d2',[]);
-    return this.instance
-}
 
-describe(){
-    console.log('Accounting Department - ID:' + this.id)
-}
-
-addEmployee(name:string){
-    if (name === 'Max'){
-        return;
+    describe(){
+        console.log('Accounting Department - ID:' + this.id)
     }
-    this.employees.push(name);
-}
 
-addReport(text:string){
-    this.reports.push(text);
-    this.lastReport = text;
-}
-printReports(){
-    console.log(this.reports);
-}
+    addEmployee(name:string){
+        if (name === 'Max'){
+            return;
+        }
+        this.employees.push(name);
+    }
+
+    addReport(text:string){
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+    printReports(){
+        console.log(this.reports);
+    }
 }
 
 // --- Using static

@@ -1,5 +1,5 @@
 // Drag & Drop Interfaces
-namespace App {
+
     export interface Draggable { // any class that render elements tjat can be drangable
         dragStartHandler(event: DragEvent): void; // listener that listen to start of that drag event
         dragEndHandler(event:DragEvent): void; // listener listen to the end of event
@@ -10,6 +10,6 @@ namespace App {
             dragLeaveHandler(event: DragEvent): void; // to give visual feedback to the user, for example change background
     
         }
-}
+
 
 // exports make avaiable outside of this file

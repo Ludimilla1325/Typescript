@@ -13,6 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -161,16 +172,13 @@ button === null || button === void 0 ? void 0 : button.addEventListener('click',
 var registeredValidators = {};
 function Required(target, propName) {
     var _a;
-    registeredValidators[target.constructor.name] = (_a = {},
-        _a[propName] = ['required'],
-        _a);
+    registeredValidators[target.constructor.name] = __assign(__assign({}, registeredValidators[target.constructor.name]), (_a = {}, _a[propName] = ['required'], _a));
 }
 function PositiveNumber(target, propName) {
     var _a;
-    registeredValidators[target.constructor.name] = (_a = {},
-        _a[propName] = ['positive'],
-        _a);
+    registeredValidators[target.constructor.name] = __assign(__assign({}, registeredValidators[target.constructor.name]), (_a = {}, _a[propName] = ['positive'], _a));
 }
+var isValid = true; // with that, we ensure that all properties are checked and not just the first one
 function validate(obj) {
     var objValidatorConfig = registeredValidators[obj.constructor.name];
     if (!objValidatorConfig) {
@@ -182,13 +190,15 @@ function validate(obj) {
             var validator = _a[_i];
             switch (validator) {
                 case 'required':
-                    return !!obj[prop];
+                    isValid = isValid && !!obj[prop]; // here just care about price but dont care abt others validators
+                    break;
                 case 'positive':
-                    return obj[prop] > 0;
+                    isValid = isValid && obj[prop] > 0;
+                    break;
             }
         }
     }
-    return true;
+    return isValid;
 }
 var Course = /** @class */ (function () {
     function Course(t, p) {

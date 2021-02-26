@@ -10,7 +10,6 @@
 // });
 
 
-
 //GENERIC FUNCTION - Generics allow you to continue working with your data in a typescript optimal way.
 
 //Constraints - you set it regarding the types your generic types can be based on, you use  "extends object" and in that u gonna say the "T" type. We guarantee that we get two objects here by setting certain constraints, and it can be anything that we set like objects, string , number , union types, etc

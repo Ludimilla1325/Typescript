@@ -24,16 +24,16 @@ namespace App {
         this.configure();
         }
     
-        configure() {
+        configure() { // Quando vamos submit o input
             this.element.addEventListener('submit', this.submitHandler);  
         }
 
         renderContent(){}
 
         private gatherUserInput(): [string, string, number] | void {
-        const enteredTitle = this.titleInputElement.value;
-        const enteredDescription = this.descriptionInputElement.value;
-        const enteredPeople = this.peopleInputElement.value;
+            const enteredTitle = this.titleInputElement.value;
+            const enteredDescription = this.descriptionInputElement.value;
+            const enteredPeople = this.peopleInputElement.value;
     
         const titleValidatable: Validatable = {
             value: enteredTitle,
@@ -57,27 +57,27 @@ namespace App {
             !validate(peopleValidatable)
         ) {
             alert('Invalid input, please try again!');
-            return;
-        } else {
-            return [enteredTitle, enteredDescription, +enteredPeople];
-        }
+                return;
+            } else {
+                return [enteredTitle, enteredDescription, +enteredPeople];
+            }
         }
     
         private clearInputs() {
-        this.titleInputElement.value = '';
-        this.descriptionInputElement.value = '';
-        this.peopleInputElement.value = '';
+            this.titleInputElement.value = '';
+            this.descriptionInputElement.value = '';
+            this.peopleInputElement.value = '';
         }
     
         @autobind
         private submitHandler(event: Event) {
         event.preventDefault();
         const userInput = this.gatherUserInput();
-        if (Array.isArray(userInput)) {
-            const [title, desc, people] = userInput;
-            projectState.addProject(title, desc, people);
-            this.clearInputs();
-        }
+            if (Array.isArray(userInput)) {
+                const [title, desc, people] = userInput;
+                projectState.addProject(title, desc, people);
+                this.clearInputs();
+            }
         }
     }
 }
