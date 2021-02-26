@@ -1,6 +1,8 @@
     //Component Base Class - abstract cuz people should not instialized but should alqays be used for inheritance
-    // Genering rending 
-    export abstract class Component<T extends HTMLElement, U extends HTMLElement>{
+    // Genering rending
+    
+    //default - this is the main, the default export file 
+    export default abstract class Component<T extends HTMLElement, U extends HTMLElement>{
         templateElement: HTMLTemplateElement;
         hostElement: T;
         element: U;
