@@ -1,5 +1,6 @@
-namespace App {
-    // Project State Management
+import { Project, ProjectStatus} from '../models/project.js';
+
+// Project State Management
 type Listener<T> = (items: T[]) =>void; // we dont care about any value that listener function might return
     
 class State<T> { // we have to specify what this state will work with
@@ -57,4 +58,3 @@ static getInstance() {
 
 export const projectState = ProjectState.getInstance();
 
-}

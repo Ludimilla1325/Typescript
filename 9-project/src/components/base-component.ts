@@ -1,5 +1,4 @@
-namespace App {
-        //Component Base Class - abstract cuz people should not instialized but should alqays be used for inheritance
+    //Component Base Class - abstract cuz people should not instialized but should alqays be used for inheritance
     // Genering rending 
     export abstract class Component<T extends HTMLElement, U extends HTMLElement>{
         templateElement: HTMLTemplateElement;
@@ -43,4 +42,3 @@ namespace App {
         abstract configure(): void;
         abstract renderContent():void;
         }
-}
