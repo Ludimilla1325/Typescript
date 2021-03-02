@@ -1,15 +1,15 @@
 const path = require ('path');
+const CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    mode:'development', // in the end ell webpage tha we r building for development
+    mode:'production', // in the end ell webpage tha we r building for development
     entry: './src/app.ts',
     output: {
         filename: 'bundle.js', // here we gonna name what will be the output(we choose the name)
         path: path.resolve(__dirname, 'dist'), // we should say the path where the output will be , and it should match with whats writte in tsconfig
-        publicPath:'dist'
     }, // here we gonna say how to work with the files
 
-    devtool: 'inline-source-map', // it tells where there will be generated source maps alredy which it should extract ad bundle it,
+    devtool: 'none', // it tells where there will be generated source maps alredy which it should extract ad bundle it,
     module : {
         rules:[
             { // this describes a test where will perform on any files it finds to find out wheter this rule here applies to that file or not
@@ -21,5 +21,8 @@ module.exports = {
     },
     resolve: { // we tell which files extensions it adds to the import
         extensions: ['.ts', '.js'] // web will look for such files and bundle all files to import together
-    }
+    },
+    plugins:[ // this pluggin gonna delete everything automatically in our dist folder, so we always have the latest most recent output in this folder
+        new CleanPlugin.CleanWebpackPlugin()
+    ]
 };
